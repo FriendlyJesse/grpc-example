@@ -1,0 +1,22 @@
+// 这是在说明我们使用的是 proto3 语法
+syntax ="proto3";
+
+// 这部分的内容是关于最后生成的 go 文件是处在哪个目录哪个包中，"."代表在当前目录生成，"service"代表了生成的go文件的包名
+option go_package = ".;service";
+
+// 然后我们需要定义一个服务，在这个服务中需要有一个方法，这个方法可以接受客户端的参数，再返回服务端的响应。
+// 其实很容易可以看出，我们定义了一个service，称为SayHello，这个服务中有一个rpc方法，名为SayHello。
+// 这个方法会发送一个HelloRequest，然后返回一个HelloResponse。
+service SayHello {
+  rpc SayHello(HelloRequest) returns(HelloResponse) {}
+}
+
+
+// 这里的 1、2、3... 只是一个标识，无其他特殊含义
+message HelloRequest {
+  string requestName = 1;
+  // int64 age = 2;
+}
+message HelloResponse {
+  string responseMsg = 1;
+}
